@@ -60,11 +60,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a href="#" class="dropdown-item" onclick="event.preventDefault();">
+                                    Profile
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
@@ -90,6 +92,9 @@
                         </div>
                         <div class="list-group-item">
                             <a href="{{route('group.create')}}">Create Groups</a>
+                        </div>
+                        <div class="list-group-item">
+                            <a href="/explore">Explore Groups</a>
                         </div>
                     </ul>
                 </div>

@@ -4,11 +4,11 @@
 
 <div class="card">
     <div class="card-header">
-        <p>Your Groups</p>
+        <p>Available Groups</p>
     </div>
     @if (count($info) == 0)
     <div class="card-body">
-        <p class="text-center">You Have not Created Any Group Yet...</p>
+        <p class="text-center">There is no existence Group</p>
     </div>
     @endif
     <div class="row">
@@ -22,7 +22,8 @@
                     <div class="card-body">
                         <h3>{{$inf->code}}</h3>
                         <p>{{$inf->description}}</p>
-                        <button class="btn btn-success float-right">Details</button>
+                        <a class="btn btn-success float-right ml-1">Details</a>
+                        <a class="btn btn-warning float-right">Request</a>
                     </div>
                 </div>
             </div>
