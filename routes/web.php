@@ -4,6 +4,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('assets.group.edit');
+});
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

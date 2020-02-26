@@ -69,7 +69,7 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('assets.group.edit');
     }
 
     /**
