@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use App\Group_details;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Session;
 
-class GroupController extends Controller
+class GroupDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +15,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = User::find(auth()->user()->id)->groups;
-        return view('assets.group.index')->with('info', $groups);
+        //
     }
 
     /**
@@ -29,7 +25,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('assets.group.create');
+        //
     }
 
     /**
@@ -40,14 +36,18 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        Group::create([
-            'user_id' => auth()->user()->id,
-            'name' => $request->name,
-            'code' => $request->code,
-            'description' => $request->description,
+        $this->validate($request, [
+            'task' => 'required'
         ]);
 
-        Session::flash('crt', 'Group has created');
+        Group_details::create([
+            'group_id' => $request->group_id,
+            'task' => $request->task,
+            'type' => 1,
+            'created_by' => $request->name,
+        ]);
+
+        Session::flash('created', 'Task is Created');
         return redirect()->back();
     }
 
@@ -70,18 +70,7 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        $group = Group::find($id);
-        $user = User::find($group->user_id);
-        $task = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 1]);
-        $progress = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 2]);
-        $done = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 3]);
-        // dd($task);
-        return view('assets.group.edit')
-            ->with('group', $group)
-            ->with('user', $user)
-            ->with('tasks', $task)
-            ->with('progress', $progress)
-            ->with('done', $done);
+        //
     }
 
     /**
@@ -105,13 +94,5 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function explore()
-    {
-        $id = auth()->user()->id;
-        $data = DB::table('groups')->whereNotIn('user_id', [$id])->get();
-        // dd($data);
-        return view('assets.group.explore')->with('info', $data);
     }
 }

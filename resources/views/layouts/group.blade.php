@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <style>
+    {{-- <style>
         a {
             color: #e2e6e8;
             text-decoration: none;
@@ -30,10 +30,10 @@
             background-color: #2d2e2f;
             border-bottom: 3px solid #6b6f6b;
         }
-    </style>
+    </style> --}}
 </head>
 
-<body class="group-page">
+<body class="">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -95,7 +95,7 @@
         <div class="mt-3 ml-3">
             <div class="row">
                 <div class="col-lg-2">
-                    <ul class="a list-group">
+                    <ul class="list-group">
                         <div class="list list-group-item" style="">
                             <a href="/home">Home</a>
                         </div>

@@ -22,7 +22,8 @@
                     <div class="card-body">
                         <h3>{{$inf->code}}</h3>
                         <p>{{$inf->description}}</p>
-                        <button class="btn btn-success float-right">Details</button>
+                        <a href="{{route('group.edit',['id'=>$inf->id])}}"
+                            class="btn btn-success float-right">Details</a>
                     </div>
                 </div>
             </div>

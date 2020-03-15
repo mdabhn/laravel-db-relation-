@@ -15,4 +15,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('group', 'GroupController');
 
+Route::resource('groupDetails', 'GroupDetailsController');
+
 Route::get('/explore', 'GroupController@explore');
