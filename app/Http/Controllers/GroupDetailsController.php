@@ -70,7 +70,7 @@ class GroupDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, $val)
+    public function edit($id)
     {
         DB::table('group_details')
             ->where('id', $id)

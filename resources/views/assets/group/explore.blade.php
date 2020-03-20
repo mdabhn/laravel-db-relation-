@@ -23,7 +23,11 @@
                         <h3>{{$inf->code}}</h3>
                         <p>{{$inf->description}}</p>
                         <a class="btn btn-success float-right ml-1">Details</a>
-                        <a class="btn btn-warning float-right">Request</a>
+                        <form action="{{route('req.store')}}" method="POST">
+                            @csrf
+                            <input type="text" name="group_id" value="{{$inf->id}}" hidden>
+                            <button type="submit" class="btn btn-warning float-right"> Request </button>
+                        </form>
                     </div>
                 </div>
             </div>

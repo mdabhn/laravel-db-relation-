@@ -5,7 +5,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('assets.group.edit');
+    dd();
 });
 
 
@@ -24,3 +24,5 @@ Route::get('/updateType/{id}/', 'GroupDetailsController@editType');
 Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
 
 Route::get('/delete/{id}/', 'GroupDetailsController@destroyx');
+
+Route::resource('req', 'ReqGroupController');

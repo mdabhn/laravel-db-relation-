@@ -19,19 +19,17 @@
                                     <span class="ml-2">
                                         {{$task->task}}
                                     </span>
-                                    <small>Created By # {{$task->created_by}}</small>
+                                    <br>
+                                    <small># {{$task->created_by}}</small>
                                     <span class="float-right ">
                                         @csrf
                                         <a class="btn" href="{{route('groupDetails.edit', ['id'=>$task->id])}}">Move</a>
 
-                                        <a href="" data-toggle="modal" data-target="#exampleModal">Assign the task</a>
+                                        <a href="" data-toggle="modal" data-target="#assign">Assign the task</a>
 
                                         <a class="btn" href="/delete/{{$task->id}}">Delete</a>
                                         {{-- popup form --}}
-                                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#exampleModal">Open
-                                        </button> --}}
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                        <div class="modal fade" id="assign" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -45,7 +43,8 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="">
+                                                        <form action="/test">
+                                                            @csrf
                                                             <label for="memeber">Available Members:</label>
                                                             <select id="memeber">
                                                                 <option value="hossain">Hossain</option>
@@ -53,17 +52,25 @@
                                                             </select>
                                                             <input type="time" name="" id="">
                                                             <input type="date" name="" id="">
+                                                            <br>
+                                                            <div class="mt-2">
+                                                                <button type="submit" class="btn btn-warning">
+                                                                    Archived
+                                                                </button>
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    Assign
+                                                                </button>
+                                                            </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Assign</button>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         {{-- popup form --}}
                                     </span>
                                 </td>
@@ -106,6 +113,8 @@
                                     <span class="float-right ">
                                         @csrf
                                         <a class="btn" href="/updateType/{{$progres->id}}">Move</a>
+                                        <a class="btn" href="">Submit</a>
+                                        <a class="btn" href="">Details</a>
                                     </span>
                                 </td>
                             </tr>
@@ -132,6 +141,7 @@
                                         @csrf
                                         {{-- <a class="btn" href="/updateTypex/{{$dn->id}}">Move</a> --}}
                                         Complited By @ {{$dn->done_by}}
+                                        <a class="btn" href="">Details</a>
                                     </span>
                                 </td>
                             </tr>
