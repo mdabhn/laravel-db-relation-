@@ -18,3 +18,9 @@ Route::resource('group', 'GroupController');
 Route::resource('groupDetails', 'GroupDetailsController');
 
 Route::get('/explore', 'GroupController@explore');
+
+Route::get('/updateType/{id}/', 'GroupDetailsController@editType');
+
+Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
+
+Route::get('/delete/{id}/', 'GroupDetailsController@destroyx');

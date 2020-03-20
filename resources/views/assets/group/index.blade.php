@@ -23,7 +23,7 @@
                         <h3>{{$inf->code}}</h3>
                         <p>{{$inf->description}}</p>
                         <a href="{{route('group.edit',['id'=>$inf->id])}}"
-                            class="btn btn-success float-right">Details</a>
+                            class="btn btn-success float-right">Assign</a>
                     </div>
                 </div>
             </div>

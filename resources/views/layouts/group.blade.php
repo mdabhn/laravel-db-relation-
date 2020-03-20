@@ -15,22 +15,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    {{-- <style>
-        a {
-            color: #e2e6e8;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .list {
-            background-color: #2d2e2f;
-            border-bottom: 3px solid #6b6f6b;
-        }
-    </style> --}}
 </head>
 
 <body class="">

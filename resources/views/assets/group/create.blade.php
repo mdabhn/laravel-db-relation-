@@ -21,8 +21,8 @@
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" style="text-transform: capitalize;" name="description" rows="4"
-                    style="resize:none" placeholder="Description of your Group">
+                <textarea class="form-control" name="description" rows="4" style="resize:none"
+                    placeholder="Description of your Group">
                 </textarea>
             </div>
 

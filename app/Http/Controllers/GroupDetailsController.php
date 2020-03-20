@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Group_details;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class GroupDetailsController extends Controller
@@ -68,11 +70,42 @@ class GroupDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $val)
     {
-        //
+        DB::table('group_details')
+            ->where('id', $id)
+            ->update(['type' => 2]);
+
+        return redirect()->back();
     }
 
+    public function editType($id)
+    {
+        $user = auth()->user()->id;
+        $name = User::find($user);
+        // dd($name->name);
+        DB::table('group_details')
+            ->where('id', $id)
+            ->update([
+                'type' => 3,
+                'done_by' => $name->name
+            ]);
+        return redirect()->back();
+    }
+
+    public function editTypex($id)
+    {
+        $user = auth()->user()->id;
+        $name = User::find($user);
+        // dd($name->name);
+        DB::table('group_details')
+            ->where('id', $id)
+            ->update([
+                'type' => 4,
+                'done_by' => $name->name
+            ]);
+        return redirect()->back();
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -81,9 +114,7 @@ class GroupDetailsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
+    { }
 
     /**
      * Remove the specified resource from storage.
@@ -91,8 +122,9 @@ class GroupDetailsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyx($id)
     {
-        //
+        DB::table('group_details')->where('id', $id)->delete();
+        return redirect()->back();
     }
 }
