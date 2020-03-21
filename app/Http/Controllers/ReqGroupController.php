@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ReqGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReqGroupController extends Controller
 {
@@ -26,7 +27,12 @@ class ReqGroupController extends Controller
             'sender_id' => auth()->user()->id,
             'group_id' => $request->group_id
         ]);
-        return redirect()->back();
+        $id = auth()->user()->id;
+        $data = DB::table('groups')->whereNotIn('user_id', [$id])->get();
+        $requested = DB::select('select * from req_groups where sender_id = ?', [$id]);
+        // dd($requested);
+        return view('assets.group.explore')->with('info', $data)
+            ->with('requested', $requested);
     }
 
 

@@ -110,8 +110,11 @@ class GroupController extends Controller
     public function explore()
     {
         $id = auth()->user()->id;
-        $data = DB::table('groups')->whereNotIn('user_id', [$id])->get();
-        // dd($data);
-        return view('assets.group.explore')->with('info', $data);
+        $data = DB::select('select * from groups where user_id != ?', [$id]);
+        $requested = DB::select('select * from req_groups where sender_id = ?', [$id]);
+
+        dd($data);
+        // return view('assets.group.explore')->with('info', $data);
+        // ->with('requested', $requested);
     }
 }
