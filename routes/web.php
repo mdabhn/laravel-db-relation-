@@ -5,7 +5,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    dd();
+    return view('assets.group.urequest');
 });
 
 

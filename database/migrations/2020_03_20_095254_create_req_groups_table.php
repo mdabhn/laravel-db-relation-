@@ -16,6 +16,8 @@ class CreateReqGroupsTable extends Migration
         Schema::create('req_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('sender_id');
+            $table->string('name');
+            $table->string('score')->default(0);
             $table->integer('group_id');
             $table->timestamps();
         });

@@ -10,9 +10,7 @@ class ReqGroupController extends Controller
 {
 
     public function index()
-    {
-        //
-    }
+    { }
 
 
     public function create()
@@ -23,22 +21,23 @@ class ReqGroupController extends Controller
 
     public function store(Request $request)
     {
+        $userDetails = DB::select('select * from users where id = ?', [auth()->user()->id]);
+        // dd($userDetails);
+
         ReqGroup::create([
-            'sender_id' => auth()->user()->id,
+            'sender_id' => $userDetails[0]->id,
+            'name' => $userDetails[0]->name,
             'group_id' => $request->group_id
         ]);
-        $id = auth()->user()->id;
-        $data = DB::table('groups')->whereNotIn('user_id', [$id])->get();
-        $requested = DB::select('select * from req_groups where sender_id = ?', [$id]);
-        // dd($requested);
-        return view('assets.group.explore')->with('info', $data)
-            ->with('requested', $requested);
+
+        return redirect()->back();
     }
 
 
     public function show($id)
     {
-        //
+        $userRequeset = DB::select('select * from req_groups where group_id = ?', [$id]);
+        return view('assets.group.urequest')->with('reqs', $userRequeset);
     }
 
 

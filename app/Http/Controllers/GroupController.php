@@ -84,37 +84,12 @@ class GroupController extends Controller
             ->with('done', $done);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function explore()
     {
         $id = auth()->user()->id;
         $data = DB::select('select * from groups where user_id != ?', [$id]);
         $requested = DB::select('select * from req_groups where sender_id = ?', [$id]);
-
-        dd($data);
-        // return view('assets.group.explore')->with('info', $data);
-        // ->with('requested', $requested);
+        return view('assets.group.explore')->with('info', $data)
+            ->with('requested', $requested);
     }
 }
