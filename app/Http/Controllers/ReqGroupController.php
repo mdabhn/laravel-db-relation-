@@ -52,8 +52,9 @@ class ReqGroupController extends Controller
     }
 
 
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        DB::table('req_groups')->where('id', $id)->delete();
+        return redirect()->back();
     }
 }

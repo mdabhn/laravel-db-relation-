@@ -25,4 +25,9 @@ Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
 
 Route::get('/delete/{id}/', 'GroupDetailsController@destroyx');
 
+Route::get('/delreq/{id}/', 'ReqGroupController@delete');
+
 Route::resource('req', 'ReqGroupController');
+
+//to join the group used in accept the request
+Route::resource('join', 'GroupMembersController');

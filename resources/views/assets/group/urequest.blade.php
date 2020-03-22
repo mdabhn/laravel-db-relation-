@@ -122,6 +122,9 @@
                             <div class="card-body text-center">
                                 <table class="table">
                                     <thead>
+                                        @if (count($reqs) == 0)
+                                        <p class="center">No Request Yet</p>
+                                        @else
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
@@ -137,11 +140,21 @@
                                             <td>{{$req->name}}</td>
                                             <td>{{$req->score}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-success">Accept</a>
-                                                <a href="#" class="btn btn-danger">Delete</a>
+                                                <form action="{{route('join.store')}}" method="POST"
+                                                    style="display:inline">
+                                                    @csrf
+                                                    <input type="text" name="id" id="id" value="{{$req->id}}" hidden>
+                                                    <input type="text" name="sender_id" id="sender_id"
+                                                        value="{{$req->sender_id}}" hidden>
+                                                    <input type="text" name="group_id" id="group_id"
+                                                        value="{{$req->group_id}}" hidden>
+                                                    <button class="btn btn-success">Accept</button>
+                                                </form>
+                                                <a href="/delreq/{{$req->id}}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
