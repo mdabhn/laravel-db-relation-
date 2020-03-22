@@ -83,7 +83,7 @@
                             <a href="/home">Home</a>
                         </div>
                         <div class="list list-group-item">
-                            <a href="#">Request</a>
+                            <a href="">Request</a>
                         </div>
                         <div class="list list-group-item">
                             <a href="">Members</a>
@@ -122,35 +122,35 @@
                             <div class="card-body text-center">
                                 <table class="table">
                                     <thead>
-                                        @if (count($reqs) == 0)
-                                        <p class="center">No Request Yet</p>
+                                        @if (count($members) == 0)
+                                        <p class="center">No Members</p>
                                         @else
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Score</th>
-                                            <th scope="col">Accept / Delete</th>
+                                            <th scope="col">Romove</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($reqs as $req)
+                                        @foreach ($members as $member)
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>{{$req->name}}</td>
-                                            <td>{{$req->score}}</td>
+                                            <td>{{$member->name}}</td>
+                                            <td>{{$member->points}}</td>
                                             <td>
-                                                <form action="{{route('join.store')}}" method="POST"
-                                                    style="display:inline">
-                                                    @csrf
-                                                    <input type="text" name="id" id="id" value="{{$req->id}}" hidden>
-                                                    <input type="text" name="sender_id" id="sender_id"
-                                                        value="{{$req->sender_id}}" hidden>
-                                                    <input type="text" name="group_id" id="group_id"
-                                                        value="{{$req->group_id}}" hidden>
-                                                    <button class="btn btn-success">Accept</button>
-                                                </form>
-                                                <a href="/delreq/{{$req->id}}" class="btn btn-danger">Delete</a>
+                                                {{-- <form action="{{route('join.store')}}" method="POST"
+                                                style="display:inline">
+                                                @csrf
+                                                <input type="text" name="id" id="id" value="{{$req->id}}" hidden>
+                                                <input type="text" name="sender_id" id="sender_id"
+                                                    value="{{$req->sender_id}}" hidden>
+                                                <input type="text" name="group_id" id="group_id"
+                                                    value="{{$req->group_id}}" hidden>
+                                                <button class="btn btn-success">Accept</button>
+                                                </form> --}}
+                                                <a href="/delmem/{{$member->id}}" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                         @endforeach

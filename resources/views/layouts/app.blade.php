@@ -91,6 +91,9 @@
                             <a href="{{route('group.index')}}">Owned Groups</a>
                         </div>
                         <div class="list-group-item">
+                            <a href="/in">Assigned IN</a>
+                        </div>
+                        <div class="list-group-item">
                             <a href="{{route('group.create')}}">Create Groups</a>
                         </div>
                         <div class="list-group-item">

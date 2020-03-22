@@ -19,6 +19,8 @@ Route::resource('groupDetails', 'GroupDetailsController');
 
 Route::get('/explore', 'GroupController@explore');
 
+Route::get('/in', 'GroupController@assignedGroups');
+
 Route::get('/updateType/{id}/', 'GroupDetailsController@editType');
 
 Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
@@ -26,6 +28,8 @@ Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
 Route::get('/delete/{id}/', 'GroupDetailsController@destroyx');
 
 Route::get('/delreq/{id}/', 'ReqGroupController@delete');
+
+Route::get('/delmem/{id}/', 'GroupMembersController@delmem');
 
 Route::resource('req', 'ReqGroupController');
 

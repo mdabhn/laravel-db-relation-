@@ -16,6 +16,8 @@ class CreateGroupMembersTable extends Migration
         Schema::create('group_members', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('group_id');
+            $table->string('name');
+            $table->integer('points')->default(0);
             $table->integer('user_id');
             $table->timestamps();
         });

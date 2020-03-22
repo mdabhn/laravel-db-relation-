@@ -86,7 +86,7 @@
                             <a href="{{route('req.show',['id'=>$group->id])}}">Request</a>
                         </div>
                         <div class="list list-group-item">
-                            <a href="">Members</a>
+                            <a href="{{route('join.show',['id'=>$group->id])}}">Members</a>
                         </div>
                         <div class="list list-group-item">
                             <a href="">Archived</a>

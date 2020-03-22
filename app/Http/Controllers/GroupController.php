@@ -11,33 +11,17 @@ use Session;
 
 class GroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $groups = User::find(auth()->user()->id)->groups;
         return view('assets.group.index')->with('info', $groups);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('assets.group.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         Group::create([
@@ -51,27 +35,15 @@ class GroupController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $group = Group::find($id);
-        $user = User::find($group->user_id);
+        $user = User::find(auth()->user()->id);
         $task = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 1]);
         $progress = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 2]);
         $done = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 3]);
@@ -91,5 +63,19 @@ class GroupController extends Controller
         $requested = DB::select('select * from req_groups where sender_id = ?', [$id]);
         return view('assets.group.explore')->with('info', $data)
             ->with('requested', $requested);
+    }
+
+    public function assignedGroups()
+    {
+        $aGroups = DB::select('select * from group_members where user_id = ?', [auth()->user()->id]);
+        $groups = [];
+        for ($i = 0; $i < sizeof($aGroups); $i++) {
+            $group = DB::select('select * from groups where id = ?', [$aGroups[$i]->group_id]);
+            array_push($groups, $group);
+        }
+
+        // dd($groups);
+
+        return view('assets.subGroups.assigned')->with('groups', $groups);
     }
 }
