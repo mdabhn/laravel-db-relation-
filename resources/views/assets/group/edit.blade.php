@@ -89,7 +89,7 @@
                             <a href="{{route('join.show',['id'=>$group->id])}}">Members</a>
                         </div>
                         <div class="list list-group-item">
-                            <a href="">Archived</a>
+                            <a href="/showArchived/{{$group->id}}">Archived</a>
                         </div>
                         <div class="list list-group-item">
                             <a href="">Assign task</a>
@@ -111,7 +111,6 @@
                         </div>
                     </ul>
                 </div>
-
 
                 <div class="col-lg-10">
                     <div class="container">
@@ -135,14 +134,17 @@
                                                         <small># {{$task->created_by}}</small>
                                                         <span class="float-right ">
                                                             @csrf
+                                                            @if ($user->id === $group->user_id)
                                                             <a class="btn"
                                                                 href="{{route('groupDetails.edit', ['id'=>$task->id])}}">Move</a>
-
-                                                            <a href="" data-toggle="modal" data-target="#assign">Assign
-                                                                the task</a>
-
+                                                            <a href="" data-toggle="modal"
+                                                                data-target="#assign">more</a>
                                                             <a class="btn" href="/delete/{{$task->id}}">Delete</a>
-                                                            {{-- popup form --}}
+                                                            @elseif($user->id != $group->user_id)
+                                                            <a href="" data-toggle="modal"
+                                                                data-target="#submit">Submit</a>
+                                                            @endif
+                                                            {{-- popup form for assign to member--}}
                                                             <div class="modal fade" id="assign" tabindex="-1"
                                                                 role="dialog" aria-labelledby="exampleModalLabel"
                                                                 aria-hidden="true">
@@ -161,22 +163,20 @@
                                                                         <div class="modal-body">
                                                                             <form action="/test">
                                                                                 @csrf
-                                                                                <label for="memeber">Available
-                                                                                    Members:</label>
+                                                                                <label for="memeber">Assign to:</label>
                                                                                 <select id="memeber">
-                                                                                    <option value="hossain">Hossain
+                                                                                    @foreach ($members as $member)
+                                                                                    <option value="{{$member->name}}">
+                                                                                        {{$member->name}}
                                                                                     </option>
-                                                                                    <option value="Tasnim">Tasnim
-                                                                                    </option>
+                                                                                    @endforeach
                                                                                 </select>
-                                                                                <input type="time" name="" id="">
-                                                                                <input type="date" name="" id="">
                                                                                 <br>
                                                                                 <div class="mt-2">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-warning">
+                                                                                    <a class="btn btn-warning"
+                                                                                        href="/archived/{{$task->id}}">
                                                                                         Archived
-                                                                                    </button>
+                                                                                    </a>
                                                                                     <button type="submit"
                                                                                         class="btn btn-primary">
                                                                                         Assign
@@ -193,12 +193,47 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            {{-- popup form --}}
+                                                            {{-- popup form for assign to member--}}
+
+                                                            {{-- popup form for assign task--}}
+                                                            <div class="modal fade" id="submit" tabindex="-1"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="exampleModalLabel">
+                                                                                Assign the work
+                                                                            </h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form action="" method="POST">
+                                                                                @csrf
+                                                                                <input type="file" name="file" id="file"
+                                                                                    required>
+                                                                                <br>
+                                                                                <button
+                                                                                    class="btn btn-success mt-1">Submit</button>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {{-- popup form Assign task--}}
                                                         </span>
                                                     </td>
                                                 </tr>
                                                 @endforeach
-
                                                 <tr>
                                                     <td>
                                                         <form action="{{ route('groupDetails.store')}}" method="POST">

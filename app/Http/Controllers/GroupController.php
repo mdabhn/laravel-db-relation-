@@ -35,11 +35,6 @@ class GroupController extends Controller
         return redirect()->back();
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $group = Group::find($id);
@@ -47,8 +42,10 @@ class GroupController extends Controller
         $task = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 1]);
         $progress = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 2]);
         $done = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 3]);
+        $members = DB::select('select * from group_members where group_id = ?', [$id]);
         // dd($task);
         return view('assets.group.edit')
+            ->with('members', $members)
             ->with('group', $group)
             ->with('user', $user)
             ->with('tasks', $task)
@@ -73,9 +70,17 @@ class GroupController extends Controller
             $group = DB::select('select * from groups where id = ?', [$aGroups[$i]->group_id]);
             array_push($groups, $group);
         }
-
-        // dd($groups);
-
         return view('assets.subGroups.assigned')->with('groups', $groups);
+    }
+
+    public function showArchived($id)
+    {
+        // dd($id);
+        $group = Group::find($id);
+        $user = User::find(auth()->user()->id);
+        $archived = DB::select('select * from group_details where group_id = ? and type = ?', [$id, 0]);
+        // dd($task);
+        return view('assets.subGroups.archived')
+            ->with('archived', $archived);
     }
 }

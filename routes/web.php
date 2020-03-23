@@ -5,7 +5,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('assets.group.urequest');
+    return view('assets.subGroups.archived');
 });
 
 
@@ -23,8 +23,17 @@ Route::get('/in', 'GroupController@assignedGroups');
 
 Route::get('/updateType/{id}/', 'GroupDetailsController@editType');
 
+Route::get('/archived/{id}/', 'GroupDetailsController@archived');
+
+// show all the archived task of individual project
+Route::get('/showArchived/{id}/', 'GroupController@showArchived');
+
+// Move archived task to task list
+Route::get('/moveArchived/{id}/', 'GroupDetailsController@moveArchived');
+
 Route::get('/updateTypex/{id}/', 'GroupDetailsController@editTypex');
 
+//delete a task from the task dataset
 Route::get('/delete/{id}/', 'GroupDetailsController@destroyx');
 
 Route::get('/delreq/{id}/', 'ReqGroupController@delete');

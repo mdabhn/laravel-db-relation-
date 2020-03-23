@@ -10,32 +10,6 @@ use Session;
 
 class GroupDetailsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -53,23 +27,6 @@ class GroupDetailsController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         DB::table('group_details')
@@ -106,25 +63,37 @@ class GroupDetailsController extends Controller
             ]);
         return redirect()->back();
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    { }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroyx($id)
     {
         DB::table('group_details')->where('id', $id)->delete();
+        return redirect()->back();
+    }
+
+    public function archived($id)
+    {
+        $user = auth()->user()->id;
+        $name = User::find($user);
+        // dd($name->name);
+        DB::table('group_details')
+            ->where('id', $id)
+            ->update([
+                'type' => 0,
+                'created_by' => $name->name
+            ]);
+        return redirect()->back();
+    }
+    public function moveArchived($id)
+    {
+        $user = auth()->user()->id;
+        $name = User::find($user);
+        // dd($name->name);
+        DB::table('group_details')
+            ->where('id', $id)
+            ->update([
+                'type' => 1,
+                'created_by' => $name->name
+            ]);
         return redirect()->back();
     }
 }
