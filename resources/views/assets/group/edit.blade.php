@@ -98,7 +98,7 @@
                             <a href="">Progress</a>
                         </div>
                         <div class="list list-group-item">
-                            <a href="">Files</a>
+                            <a href="{{route('file.show',['id'=>$group->id])}}">Files</a>
                         </div>
                         <div class="list list-group-item">
                             <a href="">Query</a>
@@ -212,9 +212,14 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <form action="" method="POST"
+                                                                            <form action="{{route('file.store')}}"
+                                                                                method="POST"
                                                                                 enctype="multipart/form-data">
                                                                                 @csrf
+                                                                                <input type="text" name="group_id"
+                                                                                    value="{{$group->id}}" hidden>
+                                                                                <input type="text" name="task_id"
+                                                                                    value="{{$task->id}}" hidden>
                                                                                 <input type="file" name="file" id="file"
                                                                                     required>
                                                                                 <br>

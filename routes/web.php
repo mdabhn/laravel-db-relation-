@@ -47,3 +47,8 @@ Route::resource('join', 'GroupMembersController');
 
 //to organize the uploaed file and more
 Route::resource('file', 'FileController');
+
+//to approve a file from admin
+Route::get('approve/{id}', 'FileController@approve');
+
+Route::get('delete/{id}', 'FileController@delete');

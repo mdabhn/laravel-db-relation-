@@ -19,6 +19,8 @@ class CreateFileManagersTable extends Migration
             $table->string('uploader_name');
             $table->integer('uploader_id');
             $table->integer('group_id');
+            $table->integer('task_id');
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }
