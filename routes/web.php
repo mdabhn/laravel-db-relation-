@@ -44,3 +44,6 @@ Route::resource('req', 'ReqGroupController');
 
 //to join the group used in accept the request
 Route::resource('join', 'GroupMembersController');
+
+//to organize the uploaed file and more
+Route::resource('file', 'FileController');

@@ -212,13 +212,14 @@
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <form action="" method="POST">
+                                                                            <form action="" method="POST"
+                                                                                enctype="multipart/form-data">
                                                                                 @csrf
                                                                                 <input type="file" name="file" id="file"
                                                                                     required>
                                                                                 <br>
-                                                                                <button
-                                                                                    class="btn btn-success mt-1">Submit</button>
+                                                                                <button class="btn btn-success mt-1"
+                                                                                    type="submit">Submit</button>
                                                                             </form>
                                                                         </div>
                                                                         <div class="modal-footer">
